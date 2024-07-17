@@ -19,10 +19,21 @@ public class ExceptionApiHandler {
 
     @ExceptionHandler(BadBodyException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiErrorResponse notFoundException(BadBodyException exception) {
+    public ApiErrorResponse badBodyException(BadBodyException exception) {
         return new ApiErrorResponse() {{
             setCode(HttpStatus.BAD_REQUEST.toString());
             setExceptionName("BadBodyException");
+            setStacktrace(getStackTraceList(exception));
+            setExceptionMessage(exception.getMessage());
+        }};
+    }
+
+    @ExceptionHandler(NotFoundByFiasException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrorResponse notFoundByFiasException(NotFoundByFiasException exception) {
+        return new ApiErrorResponse() {{
+            setCode(HttpStatus.NOT_FOUND.toString());
+            setExceptionName("NotFoundByFiasException");
             setStacktrace(getStackTraceList(exception));
             setExceptionMessage(exception.getMessage());
         }};

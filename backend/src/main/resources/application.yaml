@@ -1,4 +1,11 @@
 spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: ${DATABASE_URL}
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: validate
   application:
     name: backend
 app:
