@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: backend
+app:
+  dadata:
+    api-key: ${PUBLIC_KEY}
+    secret-key: ${SECRET_KEY}
+server:
+  port: 8080
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
