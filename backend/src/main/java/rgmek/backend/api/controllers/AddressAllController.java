@@ -1,14 +1,14 @@
 package rgmek.backend.api.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import rgmek.backend.api.exceptions.ApiErrorResponse;
 import rgmek.backend.api.service.AddressAllService;
 import rgmek.backend.dto.database.AdressAll;
@@ -16,6 +16,7 @@ import rgmek.backend.dto.database.AdressAll;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "AddressAll", description = "Взаимодействие с таблицой")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AddressAllController {
 
     private final AddressAllService addressAllService;
@@ -31,7 +32,10 @@ public class AddressAllController {
             }
     )
     @PostMapping(value = "/findByFias", produces = {"application/json"})
-    public AdressAll addressFind(@RequestBody String fias) {
+    public AdressAll addressFind(
+            @Parameter(name = "FIAS", description = "", required = true)
+            @Valid @RequestParam String fias
+    ) {
         return addressAllService.getAddressByFias(fias);
     }
 }

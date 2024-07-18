@@ -1,14 +1,14 @@
 package rgmek.backend.api.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import rgmek.backend.api.exceptions.ApiErrorResponse;
 import rgmek.backend.api.exceptions.BadBodyException;
@@ -18,6 +18,7 @@ import rgmek.backend.dto.dadata.suggestions.Suggestions;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Suggestions", description = "Предсказание адреса")
+@CrossOrigin(origins = "http://localhost:3000")
 public class SuggestionsController {
 
     private final DadataClient dadataClient;
@@ -32,8 +33,14 @@ public class SuggestionsController {
                     })
             }
     )
-    @PostMapping(value = "/suggest", produces = {"application/json"})
-    public Suggestions addressFind(@RequestBody String address) {
+    @PostMapping(
+            value = "/suggest",
+            produces = {"application/json"}
+    )
+    public Suggestions addressFind(
+            @Parameter(name = "address", description = "", required = true)
+            @RequestParam String address
+    ) {
         try {
             return dadataClient.getSuggestions(address);
         } catch (WebClientResponseException.BadRequest ex) {
