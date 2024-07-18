@@ -13,6 +13,8 @@ import rgmek.backend.api.exceptions.ApiErrorResponse;
 import rgmek.backend.api.service.AddressAllService;
 import rgmek.backend.dto.database.AdressAll;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "AddressAll", description = "Взаимодействие с таблицой")
@@ -32,9 +34,9 @@ public class AddressAllController {
             }
     )
     @PostMapping(value = "/findByFias", produces = {"application/json"})
-    public AdressAll addressFind(
-            @Parameter(name = "FIAS", description = "", required = true)
-            @Valid @RequestParam String fias
+    public List<AdressAll> addressFind(
+            @Parameter(name = "fias", description = "", required = true)
+            @RequestParam String fias
     ) {
         return addressAllService.getAddressByFias(fias);
     }

@@ -2,6 +2,8 @@ package rgmek.backend.api.service;
 
 import rgmek.backend.dto.database.AdressAll;
 
+import java.util.List;
+
 public interface AddressAllService {
-    public AdressAll getAddressByFias(String fias);
+    public List<AdressAll> getAddressByFias(String fias);
 }
