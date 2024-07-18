@@ -6,9 +6,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import rgmek.backend.api.exceptions.ApiErrorResponse;
 import rgmek.backend.api.service.AddressAllService;
 import rgmek.backend.dto.database.AdressAll;
@@ -18,7 +20,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "AddressAll", description = "Взаимодействие с таблицой")
-@CrossOrigin(origins = "http://localhost:3000")
 public class AddressAllController {
 
     private final AddressAllService addressAllService;

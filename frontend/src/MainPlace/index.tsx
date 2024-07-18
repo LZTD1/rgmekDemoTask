@@ -8,7 +8,7 @@ import styles from "./mainPlace.module.scss";
 import {AddressData, SuggestionsResponse} from "../@types/MainTypes";
 
 function MainPlace() {
-    const [suggestions, setSuggestions] = useState<SuggestionsResponse>({ suggestions: [] });
+    const [suggestions, setSuggestions] = useState<SuggestionsResponse>({suggestions: []});
     const [address, setAddress] = useState<AddressData[]>([]);
 
     const fetchSuggestions = async (address: string) => {
@@ -17,7 +17,7 @@ function MainPlace() {
                 method: 'post',
                 maxBodyLength: Infinity,
                 url: 'http://localhost:8080/suggest?address=' + encodeURIComponent(address),
-                headers: { }
+                headers: {}
             };
             axios.request(config)
                 .then((response) => {
@@ -40,8 +40,8 @@ function MainPlace() {
         debounce((value: string) => {
             if (value.trim() !== '') {
                 fetchSuggestions(value)
-            }else{
-                setSuggestions( { suggestions: [] } );
+            } else {
+                setSuggestions({suggestions: []});
                 setAddress([]);
             }
         }, 250),
@@ -52,11 +52,11 @@ function MainPlace() {
         try {
             let config = {
                 method: 'post',
-                url: `http://localhost:8080/findByFias?fias=` + encodeURIComponent(fiasId),                headers: {}
+                url: `http://localhost:8080/findByFias?fias=` + encodeURIComponent(fiasId), headers: {}
             };
             axios.request(config)
                 .then((response) => {
-                    setSuggestions( { suggestions: [] } );
+                    setSuggestions({suggestions: []});
                     setAddress(response.data)
                     console.log(response.data)
                 })

@@ -8,6 +8,7 @@ export interface Suggestion {
 export interface SuggestionsResponse {
     suggestions: Suggestion[];
 }
+
 export interface AddressData {
     code: string;
     postindex: string;
